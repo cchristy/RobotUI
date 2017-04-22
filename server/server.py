@@ -29,6 +29,18 @@ def requires_auth(f):
         return f(*args, **kwargs)
     return decorated
 
+"""
+We need 0 radians/degrees to be north/up/+y
+So we setup the standard 0 = east/+x system
+Then swap x and y so 0 radians is up/+y
+"""
+def getAngle(x1, y1, x2, y2):
+    dy = x2 - x1;
+    dx = y2 - y1;
+    angle = math.degrees(math.atan2(dy,dx));
+    #/ math.pi * 180 is how you might otherwise do degrees things;
+    #math.degrees(x) for degrees, currently is in radians
+    return angle;
 
 # examples
 @app.route('/')
